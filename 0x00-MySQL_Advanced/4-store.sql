@@ -3,7 +3,5 @@
 CREATE TRIGGER buy_decrease_item
 BEFORE INSERT
 ON orders FOR EACH Row
-BEGIN
 UPDATE items SET quantity = quantity - NEW.number 
 WHERE `name` = NEW.item_name
-END
