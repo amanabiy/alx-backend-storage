@@ -3,5 +3,6 @@
 CREATE FUNCTION SafeDiv [ a INT, b int]
 RETURNS float
 BEGIN
+    IF b = 0 THEN RETURN 0
     RETURN a / b
 END
