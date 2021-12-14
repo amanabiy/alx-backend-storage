@@ -1,0 +1,3 @@
+// sll documents which starts with Holberton
+
+db.school.find({name: {$regex: /^Holberton/}})
