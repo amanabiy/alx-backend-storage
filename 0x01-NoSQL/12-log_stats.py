@@ -10,9 +10,19 @@ if __name__ == "__main__":
     nginx_logs = client.logs.nginx
     print("{} logs".format(nginx_logs.count_documents({})))
     print("Methods:")
-    print("\tmethod GET: {}".format(nginx_logs.count_documents({"method": "GET"})))
-    print("\tmethod POST: {}".format(nginx_logs.count_documents({"method": "POST"})))
-    print("\tmethod PUT: {}".format(nginx_logs.count_documents({"method": "PUT"})))
-    print("\tmethod PATCH: {}".format(nginx_logs.count_documents({"method": "PATCH"})))
-    print("\tmethod DELETE: {}".format(nginx_logs.count_documents({"method": "DELETE"})))
-    print("{} status check".format(nginx_logs.count_documents({"method": "GET", "path": "/status"})))
+    print("\tmethod GET: {}".format(
+        nginx_logs.count_documents({"method": "GET"})))
+    print("\tmethod POST: {}".format(
+        nginx_logs.count_documents({"method": "POST"})))
+    print("\tmethod PUT: {}".format(
+        nginx_logs.count_documents(
+            {"method": "PUT"})))
+    print("\tmethod PATCH: {}".format(
+        nginx_logs.count_documents(
+            {"method": "PATCH"})))
+    print("\tmethod DELETE: {}".format(
+        nginx_logs.count_documents(
+            {"method": "DELETE"})))
+    print("{} status check".format(
+        nginx_logs.count_documents(
+            {"method": "GET", "path": "/status"})))
