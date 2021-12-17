@@ -39,4 +39,4 @@ class Cache:
             func: Optional[Callable]) -> Union[str, bytes, int, float]:
         """ Gets  """
         res: Optional[bytes] = self._redis.get(key)
-        return func(res) if func else res
+        return func(res) if func and res else res
