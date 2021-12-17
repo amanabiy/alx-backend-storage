@@ -11,6 +11,18 @@ import sys
 from uuid import uuid4
 
 
+
+def count_calls(func: Callable) -> Callable:
+    """ a decorator to count how many times a function is called """
+    key = func.__qualname__
+        @wraps(func)
+        def wrapper(self, *args, **kwargs):
+            """ a function to be wrapped """
+            self._redis.incr(key, amount=1)
+            val = func(self, *args, **kwargs)
+            return val
+        return wrapper
+
 class Cache:
     """store an instance of the Redis client as a private variable named"""
 
@@ -31,19 +43,6 @@ class Cache:
         except Exception:
             data = 0
         return data
-
-    def count_calls(self, func: Callable) -> Callable:
-        """ a decorator to count how many times a function is called """
-        key = func.__qualname__
-        self._redis.incr(key, amount=1)
-
-        @wraps(func)
-        def wrapper(*args, **kwargs):
-            """ a function to be wrapped """
-            val = func(*args, **kwargs)
-            key += 1
-            return val
-        return wrapper
 
     @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
