@@ -23,7 +23,7 @@ class Cache:
         return data.decode('UTF-8')
 
     def get_int(self, data: bytes) -> int:
-        return int.from(data, "big")
+        return int.from_bytes(data, "big")
 
     def store(self, data: Union[int, str, bytes, float]) -> str:
         """
