@@ -22,6 +22,7 @@ def count_calls(func: Callable) -> Callable:
         return val
     return wrapper
 
+
 class Cache:
     """store an instance of the Redis client as a private variable named"""
 
