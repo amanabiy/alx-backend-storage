@@ -52,7 +52,7 @@ class Cache:
         return res
 
     def count_calls(func: Callable) -> Callable:
-    """ a decorator to count how many times a function is called """
+        """ a decorator to count how many times a function is called """
         key = func.__qualname__
         self._redis.incr(key, amount=1)
         @wraps(func)
