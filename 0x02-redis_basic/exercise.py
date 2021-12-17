@@ -20,18 +20,18 @@ class Cache:
 
     def get_str(self, key: str) -> str:
         """ converts byte to str """
-        data: Optional[bytes] = self._redis.get(key)
+        data = self._redis.get(key)
         return data.decode('UTF-8')
 
     def get_int(self, key: str) -> int:
-        data: Optional[bytes] = self._redis.get(key)
+        data = self._redis.get(key)
         try:
             data = int(data.decode('UTF-8'))
         except Exception:
             data = 0
         return data
 
-    def store(self, data: Union[int, str, bytes, float]) -> str:
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         store the input data in Redis using the random key and return the key
         """
@@ -42,5 +42,5 @@ class Cache:
     def get(self, key: str,
             func: Optional[Callable]) -> Union[str, bytes, int, float]:
         """ Gets  """
-        res: Optional[bytes] = self._redis.get(key)
+        res = self._redis.get(key)
         return func(res) if func and res else res
