@@ -41,7 +41,7 @@ class Cache:
         return key
 
     def get(self, key: str,
-            func: Optional[Callable] = None) -> Union[str, bytes, int, float]:
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """ Gets  """
         res: Optional[bytes] = self._redis.get(key)
         try:
