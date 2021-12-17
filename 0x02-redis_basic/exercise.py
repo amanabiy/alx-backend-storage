@@ -18,11 +18,13 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    def get_str(self, data: bytes) -> str:
+    def get_str(self, key: bytes) -> str:
         """ converts byte to str """
+        data = self._redis.get(key)
         return data.decode('UTF-8')
 
-    def get_int(self, data: bytes) -> int:
+    def get_int(self, key: bytes) -> int:
+        data = self._redis.get(key)
         return int.from_bytes(data, "big")
 
     def store(self, data: Union[int, str, bytes, float]) -> str:
@@ -36,4 +38,4 @@ class Cache:
     def get(self, key: str, func: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """ Gets  """
         res = self._redis.get(key)
-        return func(res) if func else get_str(res)
+        return func(res) if func else res
