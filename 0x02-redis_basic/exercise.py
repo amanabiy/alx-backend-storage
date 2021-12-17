@@ -20,9 +20,8 @@ class Cache:
 
     def get_str(self, key: str) -> str:
         """ converts byte to str """
-        data: Optional[bytes] = self._redis.get(key)
-        if data:
-            return data.decode('UTF-8')
+        data = self._redis.get(key)
+        return data.decode('UTF-8')
 
     def get_int(self, key: str) -> int:
         data = self._redis.get(key)
@@ -43,7 +42,7 @@ class Cache:
     def get(self, key: str,
             fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """ Gets  """
-        res: Optional[bytes] = self._redis.get(key)
+        res = self._redis.get(key)
         try:
             res = fn(res) if fn else res
         except ValueError as err:
