@@ -10,16 +10,6 @@ import sys
 from uuid import uuid4
 
 
-def get_str(self, data: bytes) -> str:
-    """ Bytes to string """
-    return data.decode('utf-8')
-
-
-def get_int(self, data: bytes) -> int:
-    """ Bytes to integer """
-    return int.from_bytes(data, sys.byteorder)
-
-
 class Cache:
     """store an instance of the Redis client as a private variable named"""
 
@@ -28,7 +18,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
-    def store(data: Union[int, str, bytes, float]) -> str:
+    def store(self, data: Union[int, str, bytes, float]) -> str:
         """
         store the input data in Redis using the random key and return the key
         """
