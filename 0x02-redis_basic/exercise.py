@@ -26,7 +26,7 @@ class Cache:
     def get_int(self, key: str) -> int:
         data: Optional[bytes] = self._redis.get(key)
         try:
-            data = data.decode('UTF-8')
+            data = int(data.decode('UTF-8'))
         except Exception:
             data = 0
         return data
