@@ -45,7 +45,7 @@ class Cache:
         """ Gets  """
         res: Optional[bytes] = self._redis.get(key)
         try:
-            res = fn(res)
+            res = fn(res) if fn else res
         except ValueError as err:
             print(err)
         return res
