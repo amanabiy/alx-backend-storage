@@ -17,12 +17,14 @@ class Cache:
         """instantiate the class"""
         self._redis = redis.Redis()
         self._redis.flushdb()
+
     def get_str(self, data: bytes) -> str:
         """ converts byte to str """
-        return data.decode('UTF-8') 
-        
+        return data.decode('UTF-8')
+
     def get_int(self, data: bytes) -> int:
         return int.from(data, "big")
+
     def store(self, data: Union[int, str, bytes, float]) -> str:
         """
         store the input data in Redis using the random key and return the key
