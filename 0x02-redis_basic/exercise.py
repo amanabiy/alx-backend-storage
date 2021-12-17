@@ -47,5 +47,5 @@ class Cache:
         try:
             res = fn(res) if fn else res
         except ValueError as err:
-            print(err)
+            pass
         return res
