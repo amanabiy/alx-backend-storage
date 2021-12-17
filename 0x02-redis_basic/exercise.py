@@ -15,13 +15,13 @@ from uuid import uuid4
 def count_calls(func: Callable) -> Callable:
     """ a decorator to count how many times a function is called """
     key = func.__qualname__
-        @wraps(func)
-        def wrapper(self, *args, **kwargs):
-            """ a function to be wrapped """
-            self._redis.incr(key, amount=1)
-            val = func(self, *args, **kwargs)
-            return val
-        return wrapper
+    @wraps(func)
+    def wrapper(self, *args, **kwargs):
+        """ a function to be wrapped """
+        self._redis.incr(key, amount=1)
+        val = func(self, *args, **kwargs)
+        return val
+    return wrapper
 
 class Cache:
     """store an instance of the Redis client as a private variable named"""
