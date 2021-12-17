@@ -12,11 +12,12 @@ from uuid import uuid4
 
 
 def count_calls(func: Callable) -> Callable:
-    """ a rupper to count how many times a function is called """
+    """ a decorator to count how many times a function is called """
+    key = func.__qualname__
+    self._redis.incr(key, amount=1)
     @wraps(func)
     def wrapper(*args, **kwargs):
         """ a function to be wrapped """
-        key = method.__qualname__
         val = func(*args, **kwargs)
         key += 1
         return val
