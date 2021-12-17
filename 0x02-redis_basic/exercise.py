@@ -5,10 +5,22 @@
  store the input data in Redis using the random key and return the key.
 """
 from typing import Callable, Optional, Union
+from functools import wraps
 import redis
 import sys
 from uuid import uuid4
 
+
+def count_calls(func: Callable) -> Callable:
+    """ a rupper to count how many times a function is called """
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        """ a function to be wrapped """
+        key = method.__qualname__
+        val = func(*args, **kwargs)
+        key += 1
+        return val
+    return wrapper
 
 class Cache:
     """store an instance of the Redis client as a private variable named"""
@@ -31,6 +43,7 @@ class Cache:
             data = 0
         return data
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         store the input data in Redis using the random key and return the key
